@@ -318,7 +318,7 @@ Now that we have the movies loaded into Azure Cognitive Search, apply some diffe
  </details>
 
 
-## Search Score 1
+### Search Score 1
 
 Did that return what you expected? Probably not, let's dig deeper to see why.
 Please reproduce the same search again, but this time let's return the Search Score so we can see the value returned by the cosine similarity vector store calculation.
@@ -364,7 +364,7 @@ Please reproduce the same search again, but this time let's return the Search Sc
  ```
  </details>
 
-## Search Score 1 
+### Search Score 2 
  If you look at the Search Score you will see the relevant ranking of the closest vector match to the query inputted. The lower the score the farther apart the two vectors are. 
  Please change the search term and see if we can get a higher Search Score which means a higher match and closer vector proximity.
  **NOTE:** As you have seen from the results, different inputs can return different results, it all depends on what data is in the Vector Store. The higher the score the higher the likelihood of a match.
@@ -414,9 +414,13 @@ Please reproduce the same search again, but this time let's return the Search Sc
 What is Hybrid Search? The search is implemented at the field level, which means you can build queries that include vector fields and searchable text fields. The queries execute in parallel and the results are merged into a single response. Optionally, add semantic search, currently in preview, for even more accuracy with L2 reranking using the same language models that power Bing.
 
 **NOTE:** Hybrid Search is a key value proposition of Azure Cognitive Search in comparison to vector only data stores. Click Hybrid Search for more details.
+
 ### Hybrid Search 1
-# Try our original query again using Hybrid Search (ie. Combination of Text & Vector Search)
+
+#### Try our original query again using Hybrid Search (ie. Combination of Text & Vector Search)
+
 `query = "What are the best 80s movies I should look at?"`
+
 <details>
   <summary>:white_check_mark: See solution!</summary>
 
@@ -460,7 +464,7 @@ What is Hybrid Search? The search is implemented at the field level, which means
  </details>
 
 ### Hybrid Search 2
-### Try our more specific query again to see the difference in the score returned.
+#### Try our more specific query again to see the difference in the score returned.
 `query = "Who are the actors in the movie Hidden Figures?"`
 
 
@@ -558,7 +562,7 @@ Now that we have our Vector Store setup and data loaded, we are now ready to imp
  ```
  </details>
 
-# Create a prompt template to ask the question
+###  Create a prompt template to ask the question
 
 <details>
   <summary>:white_check_mark: See solution!</summary>
@@ -607,7 +611,7 @@ Now that we have our Vector Store setup and data loaded, we are now ready to imp
  ))
 
  # Build the Prompt and Execute against the Azure OpenAI to get the completion
- 
+
  chain = LLMChain(llm=llm, prompt=prompt, verbose=True)
  response = chain.run({"original_question": question, "search_results": results})
  print(response)
